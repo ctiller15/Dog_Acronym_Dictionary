@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Dictionary Extension",
+    "version": "1.0",
+    "description": "Scans every word on a page and highlights the words that exist within a dictionary.",
+    "icons": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+      }
+    ],
+    "permissions": [
+      "activeTab"
+    ]
+  }
+  
