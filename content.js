@@ -417,7 +417,8 @@ const dictionary = {
   }
 
 function highlightWords() {
-    const MAX_WORDS = 50; // maximum number of words to highlight
+    console.log('highlighting!')
+    const MAX_WORDS = 1000
     let count = 0; // number of words highlighted so far
     const divs = Array.from(document.querySelectorAll("div:not(.dog-terms-highlight):not(:empty)")).filter(f => f.textContent.trim().length > 0)
 
@@ -434,7 +435,7 @@ function highlightWords() {
         const words = node.nodeValue.trim().split(/\s+/);
         
         for (const word of words) {
-          if (dictionary.hasOwnProperty(word.toLowerCase())) {
+          if (dictionary.hasOwnProperty(word.toLowerCase()) && word === word.toUpperCase()) {
             const range = document.createRange();
             range.setStart(node, node.nodeValue.indexOf(word));
             range.setEnd(node, node.nodeValue.indexOf(word) + word.length);
@@ -470,6 +471,8 @@ function highlightWords() {
     highlightWords();
   });
   
-  window.addEventListener("scroll", debounce(highlightWords, 50));
+  window.addEventListener("wheel", debounce(highlightWords, 50));
+
+  window.addEventListener("scroll", debouce(highlightWords,50));
   
-  window.addEventListener("keydown", debounce(highlightWords, 50));
+  window.addEventListener("keydown", highlightWords);
